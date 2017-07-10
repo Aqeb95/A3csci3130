@@ -11,12 +11,19 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
 
+/** The main activity of the app and displays the initial bits of the app
+ * @author Juliano Franz, Aqeb Hamdan
+ */
 public class MainActivity extends Activity {
 
 
     private ListView contactListView;
     private FirebaseListAdapter<Contact> firebaseAdapter;
 
+    /**
+     * On create, it creates button and list view
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +40,7 @@ public class MainActivity extends Activity {
         contactListView = (ListView) findViewById(R.id.listView);
 
         //Set up the List View
-       firebaseAdapter = new FirebaseListAdapter<Contact>(this, Contact.class,
+        firebaseAdapter = new FirebaseListAdapter<Contact>(this, Contact.class,
                 android.R.layout.simple_list_item_1, appData.firebaseReference) {
             @Override
             protected void populateView(View v, Contact model, int position) {
@@ -52,19 +59,24 @@ public class MainActivity extends Activity {
         });
     }
 
+    /**
+     *on click, starts a new activity to create a business contact
+     * @param v View
+     */
     public void createContactButton(View v)
     {
         Intent intent=new Intent(this, CreateContactAcitivity.class);
         startActivity(intent);
     }
 
+    /**
+     * shows the list of business contacts
+     * @param person object
+     */
     private void showDetailView(Contact person)
     {
         Intent intent = new Intent(this, DetailViewActivity.class);
         intent.putExtra("Contact", person);
         startActivity(intent);
     }
-
-
-
 }
