@@ -14,6 +14,7 @@ import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.anything;
@@ -56,8 +57,8 @@ public class ExampleInstrumentedTest {
      */
     @Test
     public void read(){
-        SystemClock.sleep(1000);
-        onData(anything()).inAdapterView(withId(R.id.listView)).atPosition(1).perform(click());
+        SystemClock.sleep(2000);
+        onData(anything()).inAdapterView(withId(R.id.listView)).atPosition(0).perform(click());
     }
 
     /**
@@ -66,9 +67,10 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void update(){
-        SystemClock.sleep(1000);
+        SystemClock.sleep(1500);
         onData(anything()).inAdapterView(withId(R.id.listView)).atPosition(0).perform(click());
-        onView(withId(R.id.updateButton)).perform(click());
+        onView(withId(R.id.name)).perform(replaceText("Dennis"));
+        onView(withId(R.id.updateButton)).perform(click()).perform(closeSoftKeyboard());
     }
 
     /**
